@@ -1,0 +1,12 @@
+# Crossword AI creator
+
+## What can make a good crossword for me
+- easter eggs
+- words relative to what time of year it is
+- words that people know
+
+## Could we make a crossword more personal?
+- maybe taylor the words to be related to that person
+
+## TODO
+- Add info getting Ollama up and running
