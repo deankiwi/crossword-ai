@@ -8,5 +8,15 @@
 ## Could we make a crossword more personal?
 - maybe taylor the words to be related to that person
 
+## Creating own board (WIP)
+
+upload own board from command line
+uv run main.py < example_board.txt 
+
+## Run tests
+
+`uv run pytest`
+
+
 ## TODO
 - Add info getting Ollama up and running
