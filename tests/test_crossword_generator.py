@@ -1,5 +1,12 @@
-import pytest
-from crossword_generator import TrieNode, input_to_board, load_and_build_tries_of_diff_lengths, unique_word_length
+import pprint
+# import pytest
+from crossword_generator import (
+    TrieNode,
+    create_crossword,
+    input_to_board,
+    load_and_build_tries_of_diff_lengths,
+    unique_word_length,
+)
 
 
 def test_unique_word_length_simple():
@@ -40,10 +47,31 @@ xxX
 Xxx"""
     assert input_to_board(text) == [["x", "x", "x"], ["x", "x", "x"], ["x", "x", "x"]]
 
+
 def test_load_and_build_tries_of_diff_lengths():
-    uniques = set([3,4])
-    tries = load_and_build_tries_of_diff_lengths(uniques,"popular_dictionary.txt")
+    uniques = set([3, 4])
+    tries = load_and_build_tries_of_diff_lengths(uniques, "popular_dictionary.txt")
     assert tries.keys() == uniques
     for num in tries.keys():
         assert type(tries[num]) == TrieNode
 
+
+def test_create_crossword():
+    crosswords = create_crossword(5, 5, False, "./tests/test_words_small.txt")
+    pprint.pprint(crosswords)
+    assert crosswords == [
+        [
+            ["a", "b", "b", "o", "t"],
+            ["c", "r", "i", "m", "e"],
+            ["h", "a", "t", "e", "s"],
+            ["e", "v", "e", "n", "t"],
+            ["s", "a", "s", "s", "y"],
+        ],
+        [
+            ["a", "c", "h", "e", "s"],
+            ["b", "r", "a", "v", "a"],
+            ["b", "i", "t", "e", "s"],
+            ["o", "m", "e", "n", "s"],
+            ["t", "e", "s", "t", "y"],
+        ],
+    ]
