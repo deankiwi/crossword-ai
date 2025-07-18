@@ -108,11 +108,20 @@ def print_crossword_from_across_tree(words: list):
         words_copy[i] = words_copy[i].before
 
 
-def load_and_build_tries_of_diff_lengths(uniques: set, file)-> dict[int, TrieNode]:
+def load_and_build_tries_of_diff_lengths(uniques: set, file_path: str) -> dict[int, TrieNode]:
+    """Build multiple tries for the provided word lengths.
+
+    Args:
+        uniques: A set of word lengths to build tries for.
+        file_path: Path to the dictionary file to load words from.
+
+    Returns:
+        A mapping of word length to the root ``TrieNode`` of the resulting trie.
+    """
     tries = {}
     for num in uniques:
-        tries[num] = load_and_build_trie_with_length("popular_dictionary.txt", num).getTree()
-    
+        tries[num] = load_and_build_trie_with_length(file_path, num).getTree()
+
     return tries
 
 
@@ -172,18 +181,33 @@ def unique_word_length(board: List[List[str]]) -> set:
     return uniques
 
 
-def create_crossword(width: int, height: int, allow_repeats: bool) -> list:
+def create_crossword(
+    width: int,
+    height: int,
+    allow_repeats: bool,
+    file_path: str = "popular_dictionary.txt",
+) -> list:
+    """Generate all crossword grids for the given dimensions.
+
+    Args:
+        width: Width of the crossword grid.
+        height: Height of the crossword grid.
+        allow_repeats: Whether duplicate words are allowed.
+        file_path: Dictionary file used to build the tries.
+
+    Returns:
+        A list of crossword boards, where each board is a list of letter strings.
+    """
+
     results = []
     # TODO string to array, and get all diff tries we need
 
     # TODO load_and_build_tries_of_diff_lengths()
-    trie_w = load_and_build_trie_with_length("popular_dictionary.txt", width).getTree()
+    trie_w = load_and_build_trie_with_length(file_path, width).getTree()
     if width == height:
         trie_h = trie_w
     else:
-        trie_h = load_and_build_trie_with_length(
-            "popular_dictionary.txt", height
-        ).getTree()
+        trie_h = load_and_build_trie_with_length(file_path, height).getTree()
         allow_repeats = True  # imposable to have them if w!=h so no need to check
 
     words_down = [trie_h for _ in range(width)]
