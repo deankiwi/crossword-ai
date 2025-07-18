@@ -6,7 +6,7 @@
 - words that people know
 
 ## Could we make a crossword more personal?
-- maybe taylor the words to be related to that person
+- maybe tailor the words to be related to that person
 
 ## Creating own board (WIP)
 
