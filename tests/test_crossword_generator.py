@@ -1,5 +1,5 @@
 import pprint
-# import pytest
+import pytest
 from crossword_generator import (
     TrieNode,
     create_crossword,
@@ -46,6 +46,12 @@ def test_input_to_board_x():
 xxX
 Xxx"""
     assert input_to_board(text) == [["x", "x", "x"], ["x", "x", "x"], ["x", "x", "x"]]
+
+
+def test_input_to_board_invalid():
+    text = "xx\nxxx"
+    with pytest.raises(ValueError):
+        input_to_board(text)
 
 
 def test_load_and_build_tries_of_diff_lengths():
