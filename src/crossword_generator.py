@@ -137,7 +137,7 @@ def board_input(text: str) -> tuple[list, set]:
 
 def input_to_board(text: str) -> List[List[str]]:
     board = []
-    # TODO throw error is board isn't of some size
+    row_length = None
 
     for letters in text.split("\n"):
         row = []
@@ -147,7 +147,18 @@ def input_to_board(text: str) -> List[List[str]]:
                     "Invalid input type, use only 'x', 'o', and newlines ('\\n')"
                 )
             row.append(char.lower())
+
+        if row_length is None:
+            row_length = len(row)
+            if row_length == 0:
+                raise ValueError("No columns provided")
+        elif len(row) != row_length:
+            raise ValueError("All rows must have the same length")
+
         board.append(row)
+
+    if not board:
+        raise ValueError("No rows provided")
 
     return board
 
